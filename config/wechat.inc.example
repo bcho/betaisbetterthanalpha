@@ -1,0 +1,5 @@
+<?php
+
+$TOKEN = 'aww';
+
+$DB = ':memory:';
