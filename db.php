@@ -1,6 +1,7 @@
 <?php
 
-$DB = trim(file_get_contents('config/db'));
+$config = parse_ini_file('config.ini',  1);
+$DB = $config['db']['name'];
 
 $cursor = new SQLite3($DB);
 

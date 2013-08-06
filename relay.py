@@ -3,11 +3,14 @@
 import time
 import threading
 import SocketServer
+from ConfigParser import ConfigParser
 
 from handler import RequestHandler
 
 
-from config.relay import HOST, PORT
+config = ConfigParser()
+config.read('config.ini')
+HOST, PORT = config.get('relay', 'host'), int(config.get('relay', 'port'))
 
 
 class ThreadedTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):

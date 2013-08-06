@@ -1,8 +1,12 @@
 #coding: utf-8
 
 import SocketServer
+from ConfigParser import ConfigParser
 
-from config.relay import BUFSIZE
+
+config = ConfigParser()
+config.read('config.ini')
+BUFSIZE = config.get('relay', 'bufsize')
 
 
 class RequestHandler(SocketServer.BaseRequestHandler):

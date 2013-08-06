@@ -1,6 +1,5 @@
 <?php
 
-require_once('config/wechat.inc');
 require_once('Wechat.php');
 
 
@@ -37,5 +36,7 @@ class Remote extends Wechat {
     }
 }
 
-$remote = new Remote($TOKEN, TRUE);
+$config = parse_ini_file('config.ini', 1);
+
+$remote = new Remote($config['wechat']['token'], TRUE);
 $remote->run();
