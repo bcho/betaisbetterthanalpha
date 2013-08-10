@@ -20,9 +20,9 @@ function dispatch($raw) {
     }
 
     /* turn on/off */
-    if (preg_match($op_, $raw, $matches)) {
-        $op = $matches[1];
-        $obj = $matches[2];
+    if (strpos($raw, '打开') === 0) {
+        $op = '打开';
+        $obj = trim(explode($op, $raw)[0]);
 
         ard_op($op, $obj);
         return msg_op($op, $obj);
