@@ -31,9 +31,6 @@ class RequestHandler(SocketServer.BaseRequestHandler):
             if payload:
                 self.store_stats(payload.strip())
 
-                print payload
-                self.request.sendall('open:h1')
-
                 command = self.get_command()
                 if command:
                     self.request.sendall(command['value'])
@@ -65,7 +62,14 @@ class RequestHandler(SocketServer.BaseRequestHandler):
         cursor.execute('''SELECT * FROM `jobs`
             WHERE `consumed` = 0
             ORDER BY `created` DESC LIMIT 1;''')
-        return _decorate(cursor.fetchone())
+        ret = _decorate(cursor.fetchone())
+
+        cursor.execute('''UPDATE `jobs`
+        SET `consumed` = 1
+        WHERE `id` = :id;''', {'id': ret['id']})
+        self.connection.commit()
+
+        return ret
 
     def store_stats(self, stats):
         cursor = self.connection.cursor()
