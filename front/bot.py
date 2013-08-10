@@ -33,4 +33,8 @@ def dispatch(message):
         else:
             return msg.op_failed(op, obj)
 
+    # get report
+    if pattern.get_report(content):
+        return action.get_report()
+
     return msg.show_help()
