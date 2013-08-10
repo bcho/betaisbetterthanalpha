@@ -22,7 +22,14 @@ function dispatch($raw) {
     /* turn on/off */
     if (strpos($raw, '打开') === 0) {
         $op = '打开';
-        $obj = trim(explode($op, $raw)[0]);
+        $obj = trim(explode($op, $raw)[1]);
+
+        ard_op($op, $obj);
+        return msg_op($op, $obj);
+    }
+    if (strpos($raw, '关闭') === 0) {
+        $op = '关闭';
+        $obj = trim(explode($op, $raw)[1]);
 
         ard_op($op, $obj);
         return msg_op($op, $obj);
