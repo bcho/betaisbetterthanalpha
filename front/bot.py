@@ -5,6 +5,7 @@ import werobot
 from config import TOKEN
 
 import msg
+import pattern
 
 robot = werobot.WeRoBot(token=TOKEN)
 
@@ -16,5 +17,11 @@ def subscribe(message):
 
 @robot.text
 def dispatch(message):
-    if message.content == 'help':
-        return msg.show_help()
+    content = message.content.strip()
+    if not isinstance(content, unicode):
+        content = content.decode('utf-8')
+
+    if pattern.show_help(content):
+        return msg.subscribe()
+
+    return message.content
