@@ -5,4 +5,4 @@ __all__ = ['show_help']
 
 def show_help():
     return u'''世界你好
-    输入 h/help/帮助/ 查看帮助!'''
+输入 h/help/帮助/ 查看帮助!'''
