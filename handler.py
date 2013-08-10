@@ -1,5 +1,6 @@
 #coding: utf-8
 
+import time
 import sqlite3
 import SocketServer
 from ConfigParser import ConfigParser
@@ -24,13 +25,20 @@ class RequestHandler(SocketServer.BaseRequestHandler):
     def handle(self):
         '''Just forward all the operations to wechat layer'''
 
-        payload = self.request.recv(BUFSIZE)
-        self.store_stats(payload.strip())
+        while True:
+            payload = self.request.recv(BUFSIZE)
 
-        command = self.get_command()
-        if command:
-            self.request.sendall(command['value'])
-            self.consume_command(command['id'])
+            if payload:
+                self.store_stats(payload.strip())
+
+                print payload
+
+                command = self.get_command()
+                if command:
+                    self.request.sendall(command['value'])
+                    self.consume_command(command['id'])
+            else:
+                time.sleep(1)
 
     def consume_command(self, _id):
         '''mark a command as consumed'''
@@ -39,6 +47,7 @@ class RequestHandler(SocketServer.BaseRequestHandler):
         cursor.execute('''UPDATE `jobs`
         SET `consumed` = 1
         WHERE `id` = :id;''', {'id': _id})
+        self.connection.commit()
 
     def get_command(self):
         '''get one latest command'''
@@ -61,3 +70,4 @@ class RequestHandler(SocketServer.BaseRequestHandler):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO `stats` (`value`)
         VALUES(:value)''', {'value': stats})
+        self.connection.commit()
