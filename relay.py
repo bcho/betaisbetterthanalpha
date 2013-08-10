@@ -29,7 +29,7 @@ def main():
             time.sleep(2)
     except KeyboardInterrupt:
         print 'bye'
-        server.shutdown()
+        #server.shutdown()
 
 
 if __name__ == '__main__':

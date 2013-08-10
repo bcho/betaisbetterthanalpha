@@ -32,6 +32,7 @@ class RequestHandler(SocketServer.BaseRequestHandler):
                 self.store_stats(payload.strip())
 
                 print payload
+                self.request.sendall('open:h1')
 
                 command = self.get_command()
                 if command:
