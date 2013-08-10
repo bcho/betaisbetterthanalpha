@@ -6,6 +6,7 @@ from config import TOKEN
 
 import msg
 import pattern
+import action
 
 robot = werobot.WeRoBot(token=TOKEN)
 
@@ -27,6 +28,7 @@ def dispatch(message):
     # turn on/off
     op, obj = pattern.op(content)
     if op and obj:
+        print action.op(op, obj)
         return msg.op(op, obj)
 
     return msg.show_help()
