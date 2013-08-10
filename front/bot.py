@@ -37,8 +37,8 @@ def dispatch(message):
     if pattern.get_report(content):
         ret = action.get_report()
         if ret:
-            return ret
+            return msg.get_report(ret)
         else:
-            msg.report_not_found()
+            return msg.report_not_found()
 
     return msg.show_help()

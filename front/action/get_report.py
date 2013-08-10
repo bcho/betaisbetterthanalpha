@@ -3,6 +3,7 @@
 __all__ = ['get_report']
 
 import sqlite3
+import json
 
 from front import config
 
@@ -12,9 +13,17 @@ def get_report():
     def _decorate(row):
         if not row:
             return {}
+        try:
+            value = json.loads(row[1])
+        except ValueError:
+            return {}
+
         return {
             'id': row[0],
-            'value': row[1]
+            't': value['T'],
+            'h': value['H'],
+            'pm': value['D'],
+            'ch': value['G']
         }
 
     connection = sqlite3.connect(config.DB_PATH)
