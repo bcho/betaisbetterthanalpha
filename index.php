@@ -2,6 +2,8 @@
 
 require_once('Wechat.php');
 
+require_once('front/dispatch.php');
+
 
 class Remote extends Wechat {
 
@@ -14,9 +16,8 @@ class Remote extends Wechat {
     }
 
     protected function onText() {
-        $this->responseText('大家晚安哇 :) 明天见!');
-        #$this->responseText('text msg received: ' .
-        #    $this->getRequest('content'));
+        $resp = dispatch($this->getRequest('content'));
+        $this->responseText($resp);
     }
 
     protected function onImage() {
