@@ -42,4 +42,4 @@ def get_report():
         WHERE `id` = :id;''', {'id': ret['id']})
     connection.commit()
 
-    return u'值: %s' % ret['value']
+    return ret
