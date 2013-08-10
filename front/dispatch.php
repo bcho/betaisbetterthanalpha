@@ -20,8 +20,7 @@ function dispatch($raw) {
     }
 
     /* turn on/off */
-    preg_match($op_, $raw, $matches);
-    if ($matches) {
+    if (preg_match($op_, $raw, $matches)) {
         $op = $matches[1];
         $obj = $matches[2];
 
