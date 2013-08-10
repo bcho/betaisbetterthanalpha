@@ -23,7 +23,14 @@ def get_report():
     cursor.execute('''SELECT * FROM `stats`
         WHERE `consumed` = 0
         ORDER BY `created` DESC LIMIT 1;''')
-
     ret = _decorate(cursor.fetchone())
+
+    if not ret:
+        return None
+
+    cursor.execute('''UPDATE `stats`
+        SET `consumed` = 1
+        WHERE `id` = :id;''', {'id': ret['id']})
+    connection.commit()
 
     return u'值: %s' % ret['value']

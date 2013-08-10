@@ -35,6 +35,10 @@ def dispatch(message):
 
     # get report
     if pattern.get_report(content):
-        return action.get_report()
+        ret = action.get_report()
+        if ret:
+            return ret
+        else:
+            msg.report_not_found()
 
     return msg.show_help()
