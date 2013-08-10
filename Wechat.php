@@ -1,1 +1,0 @@
-wechat-php-sdk/src/Wechat.php
