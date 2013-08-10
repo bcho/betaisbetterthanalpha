@@ -29,5 +29,5 @@ function dispatch($raw) {
         return msg_op($op, $obj);
     }
 
-    return msg_help();
+    return $raw . ' ' . msg_help();
 }
