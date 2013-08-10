@@ -28,7 +28,9 @@ def dispatch(message):
     # turn on/off
     op, obj = pattern.op(content)
     if op and obj:
-        print action.op(op, obj)
-        return msg.op(op, obj)
+        if action.op(op, obj):
+            return msg.op(op, obj)
+        else:
+            return msg.op_failed(op, obj)
 
     return msg.show_help()
