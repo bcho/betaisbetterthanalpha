@@ -22,7 +22,6 @@ def get_report():
 
     cursor.execute('''SELECT * FROM `stats`
         WHERE `consumed` = 0
-        LIMIT 1
         ORDER BY `created` DESC LIMIT 1;''')
 
     ret = _decorate(cursor.fetchone())
