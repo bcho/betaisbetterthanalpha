@@ -28,4 +28,6 @@ function dispatch($raw) {
         ard_op($op, $obj);
         return msg_op($op, $obj);
     }
+
+    return msg_help();
 }
