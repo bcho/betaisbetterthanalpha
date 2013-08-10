@@ -55,7 +55,7 @@ class RequestHandler(SocketServer.BaseRequestHandler):
                 return {}
             return {
                 'id': row[0],
-                'value': row[1]
+                'value': row[1].strip() + '\n'
             }
 
         cursor = self.connection.cursor()
