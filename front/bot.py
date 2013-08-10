@@ -22,6 +22,11 @@ def dispatch(message):
         content = content.decode('utf-8')
 
     if pattern.show_help(content):
-        return msg.subscribe()
+        return msg.show_help()
 
-    return message.content
+    # turn on/off
+    op, obj = pattern.op(content)
+    if op and obj:
+        return msg.op(op, obj)
+
+    return message.show_help()
