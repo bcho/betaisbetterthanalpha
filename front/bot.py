@@ -29,4 +29,4 @@ def dispatch(message):
     if op and obj:
         return msg.op(op, obj)
 
-    return message.show_help()
+    return msg.show_help()
