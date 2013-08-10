@@ -64,10 +64,11 @@ class RequestHandler(SocketServer.BaseRequestHandler):
             ORDER BY `created` DESC LIMIT 1;''')
         ret = _decorate(cursor.fetchone())
 
-        cursor.execute('''UPDATE `jobs`
-        SET `consumed` = 1
-        WHERE `id` = :id;''', {'id': ret['id']})
-        self.connection.commit()
+        if ret:
+            cursor.execute('''UPDATE `jobs`
+                SET `consumed` = 1
+                WHERE `id` = :id;''', {'id': ret['id']})
+            self.connection.commit()
 
         return ret
 
