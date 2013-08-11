@@ -20,6 +20,8 @@ def op(op, obj):
         obj = 'tv'
     elif obj == u'空调':
         obj = 'air'
+    elif obj == 'ir':
+        obj = 'ir'
     else:
         return False
 

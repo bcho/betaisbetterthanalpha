@@ -33,6 +33,13 @@ def dispatch(message):
         else:
             return msg.op_failed(op, obj)
 
+    # send ir
+    if pattern.send_ir(content):
+        if action.op('send', 'ir'):
+            return msg.send_ir()
+        else:
+            return msg.send_ir_failed()
+
     # get report
     if pattern.get_report(content):
         ret = action.get_report()
