@@ -4,7 +4,7 @@ __all__ = ['show_help']
 
 
 def show_help():
-    return u'''世界你好
+    return u'''Hello World!
 
 输入 **h/help/帮助** 来显示帮助!
 可以通过 **打开/关闭电视** 来控制你的电视哦 (｡･ω･)ﾉﾞ
