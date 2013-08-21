@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `stats`;
 /* jobs queue */
 CREATE TABLE `jobs` (
     `id` integer PRIMARY KEY,
-    /* command */
+    /* job */
     `value` varchar(1024) NOT NULL,
     `consumed` TINYINT(1) DEFAULT 0,
     `created` timestamp DEFAULT CURRENT_TIMESTAMP
