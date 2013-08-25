@@ -15,6 +15,7 @@ HOST, PORT = config.get('relay', 'host'), int(config.get('relay', 'port'))
 
 class ThreadedTCPServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     allow_reuse_address = True
+    daemon_threads = True
 
 
 def main():
